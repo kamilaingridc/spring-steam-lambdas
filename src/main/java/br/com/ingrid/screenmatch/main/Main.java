@@ -6,10 +6,7 @@ import br.com.ingrid.screenmatch.model.DadosTemporada;
 import br.com.ingrid.screenmatch.service.ConsumoAPI;
 import br.com.ingrid.screenmatch.service.ConverteDados;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -42,8 +39,14 @@ public class Main {
 
         List<DadosEpisodio> dadosEpisodios = temporadas.stream()
                 .flatMap(t -> t.episodios().stream()) // puxar todas listas juntas (episodios)
-                // .collect(Collectors.toList());  // joga em uma lista
-                .toList();  // resulta uma lista imutável (não consegue alterar)
+                .collect(Collectors.toList());  // joga em uma lista
+                // .toList();  // resulta uma lista imutável (não consegue alterar)
+
+        System.out.println("\n Top 5 episódios: \n");
+        dadosEpisodios.stream()
+                .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
+                .limit(5)
+                .forEach(System.out::println);
 
 
 //        for (int i = 0; i < dados.totalTemporadas(); i++) {
