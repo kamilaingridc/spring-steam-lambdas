@@ -3,6 +3,7 @@ package br.com.ingrid.screenmatch.main;
 import br.com.ingrid.screenmatch.model.DadosEpisodio;
 import br.com.ingrid.screenmatch.model.DadosSerie;
 import br.com.ingrid.screenmatch.model.DadosTemporada;
+import br.com.ingrid.screenmatch.model.Episodio;
 import br.com.ingrid.screenmatch.service.ConsumoAPI;
 import br.com.ingrid.screenmatch.service.ConverteDados;
 
@@ -44,10 +45,12 @@ public class Main {
 
         System.out.println("\n Top 5 episódios: \n");
         dadosEpisodios.stream()
+                .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
                 .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
                 .limit(5)
                 .forEach(System.out::println);
 
+        List<Episodio> episodios =
 
 //        for (int i = 0; i < dados.totalTemporadas(); i++) {
 //            List<DadosEpisodio> episodiosTemporada = temporadas.get(i).episodios();
