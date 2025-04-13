@@ -50,7 +50,12 @@ public class Main {
                 .limit(5)
                 .forEach(System.out::println);
 
-        List<Episodio> episodios =
+        List<Episodio> episodios = temporadas.stream()
+                .flatMap(t -> t.episodios().stream()
+                        .map(d -> new Episodio(t.numero(), d))
+                ).collect(Collectors.toList());
+
+        episodios.forEach(System.out::println);
 
 //        for (int i = 0; i < dados.totalTemporadas(); i++) {
 //            List<DadosEpisodio> episodiosTemporada = temporadas.get(i).episodios();
