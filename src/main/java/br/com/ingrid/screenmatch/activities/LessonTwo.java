@@ -3,6 +3,8 @@ package br.com.ingrid.screenmatch.activities;
 import java.util.Arrays;
 import java.util.List;
 
+// https://docs.oracle.com/javase/8/docs/api/?java/util/stream/Stream.html
+
 public class LessonTwo {
     public static void main(String[] args) {
         // 1 - Dada a lista de números inteiros abaixo, filtre apenas os números pares e imprima-os.
