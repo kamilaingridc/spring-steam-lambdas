@@ -123,8 +123,14 @@ public class Main {
                         ));
         System.out.println(avaliacoesPorTemporada);
 
+        // Cria um objeto que vai armazenar estatísticas sobre os episódios:
+        // como média, valor mínimo, máximo e quantidade
         DoubleSummaryStatistics est = episodios.stream()
+
+                // Filtra os episódios que têm avaliação maior que 0.0
                 .filter(e -> e.getAvaliacao() > 0.0)
+
+                // Coleta as estatísticas (média, máximo, mínimo, contagem) das avaliações dos episódios
                 .collect(Collectors.summarizingDouble(Episodio::getAvaliacao));
         System.out.println("Média: " + est.getAverage());
         System.out.println("Melhor episódio: " + est.getMax());
