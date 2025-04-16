@@ -63,19 +63,19 @@ public class Main {
                 ).collect(Collectors.toList());
 
         episodios.forEach(System.out::println);
-
-        System.out.println("Digite um trecho do título do episódio: ");
-        var trechoTitulo = leitura.nextLine();
-
-        Optional<Episodio> episodioBuscado = episodios.stream()  // Optional é um objeto contêiner que pode ou não conter um valor não nulo.
-                .filter(e -> e.getTitulo().toUpperCase().contains(trechoTitulo.toUpperCase()))
-                .findFirst();  // encontrar a primeira referência que estou buscando
-        if (episodioBuscado.isPresent()) {
-            System.out.println("Episódio encontrado.");
-            System.out.println("Temporada " + episodioBuscado.get().getTemporada());
-        } else {
-            System.out.println("Episódio não encontrado.");
-        }
+//
+//        System.out.println("Digite um trecho do título do episódio: ");
+//        var trechoTitulo = leitura.nextLine();
+//
+//        Optional<Episodio> episodioBuscado = episodios.stream()  // Optional é um objeto contêiner que pode ou não conter um valor não nulo.
+//                .filter(e -> e.getTitulo().toUpperCase().contains(trechoTitulo.toUpperCase()))
+//                .findFirst();  // encontrar a primeira referência que estou buscando
+//        if (episodioBuscado.isPresent()) {
+//            System.out.println("Episódio encontrado.");
+//            System.out.println("Temporada " + episodioBuscado.get().getTemporada());
+//        } else {
+//            System.out.println("Episódio não encontrado.");
+//        }
 
 //        System.out.println("A partir de que ano deseja ver os episódios?");
 //        var ano = leitura.nextInt();
@@ -108,5 +108,18 @@ public class Main {
 //                .filter(n -> n.startsWith("M")) // filtra os nomes começa com M
 //                .map(n -> n.toUpperCase()) // coloca como letra maiúscula
 //                .forEachOrdered(System.out::println);  // printa depois de todas exigencias
+
+        // Cria um Map onde:
+        // - a chave (Integer) é o número da temporada
+        // - o valor (Double) é a média das avaliações dos episódios dessa temporada
+        Map<Integer, Double> avaliacoesPorTemporada = episodios.stream() // Cria um stream da lista de episódios
+                .filter(e -> e.getAvaliacao() > 0.0)
+                .collect(
+                        Collectors.groupingBy( // Agrupa os elementos do stream por uma chave
+                                Episodio::getTemporada, // Função que extrai a chave de agrupamento: a temporada do episódio
+                                Collectors.averagingDouble( // Operação de redução que será aplicada para cada grupo
+                                        Episodio::getAvaliacao // Função que extrai o valor da avaliação do episódio (double)
+                                )
+                        ));
     }
 }
