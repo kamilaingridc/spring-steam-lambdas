@@ -32,9 +32,6 @@ Rode o projeto normalmente pela IDE.
 
 Não é necessário configurar banco de dados ou ambiente externo para rodar.
 
-📸 Prints (opcional)
-Você pode adicionar aqui capturas de tela ou gifs do funcionamento do projeto.
-
 ## 🧠 Aprendizados
 
 - Consumo de APIs REST com Java
